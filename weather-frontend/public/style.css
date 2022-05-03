@@ -1,0 +1,15 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+[v-cloak]>* {
+    display: none;
+}
+
+[v-cloak]::before {
+    content: "loading data...";
+    font-size: 1.5rem;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
