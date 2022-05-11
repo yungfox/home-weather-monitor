@@ -1,5 +1,10 @@
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #17171a;
+    color: white;
+    font-weight: 200;
+    display: flex;
+    justify-content: center;
 }
 
 [v-cloak]>* {
@@ -12,4 +17,10 @@ body {
     width: 100vw;
     display: flex;
     justify-content: center;
+}
+
+#app {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
