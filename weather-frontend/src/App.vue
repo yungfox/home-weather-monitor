@@ -118,19 +118,14 @@ export default {
         auth.signInWithEmailAndPassword(process.env.VUE_APP_FIREBASE_USER, process.env.VUE_APP_FIREBASE_PASSWORD)
             .then(() => {
                 //attach listener for the new entries in the database
-                db.collection('readings').onSnapshot(snap => {
-                    //get the most recent entry in the database
-                    snap.query.orderBy('date', 'desc').limit(1).get()
-                    .then((querySnapshot) => {
-                        //access data from the query result
-                        let result = querySnapshot.docs[0]._delegate._document.data.value.mapValue.fields
-                        console.log(result)
-                        
-                        //update vue's reactive properties with the data fetched from the query result
-                        self.temperature = parseFloat(result.temperature.stringValue).toFixed(1)
-                        self.humidity = parseFloat(result.humidity.stringValue).toFixed(1)
-                        self.heat_index = parseFloat(result.heat_index.stringValue).toFixed(1)
-                    })
+                db.ref('firemqtt').orderByKey().limitToLast(1).on('child_added', (data) => {
+                    //access data from the query result
+                    let result = data.toJSON()
+
+                    //update vue's reactive properties with the data fetched from the query result
+                    self.temperature = parseFloat(result.temperature).toFixed(1)
+                    self.humidity = parseFloat(result.humidity).toFixed(1)
+                    self.heat_index = parseFloat(result.heat_index).toFixed(1)
                 })
             })
             .catch((error) => {
