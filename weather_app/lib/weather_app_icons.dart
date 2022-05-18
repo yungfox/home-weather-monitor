@@ -19,7 +19,7 @@ class WeatherAppIcons {
   WeatherAppIcons._();
 
   static const _kFontFam = 'WeatherAppIcons';
-  static const String _kFontPkg = null;
+  static const String? _kFontPkg = null;
 
   static const IconData moisture = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData thermometer_sun = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
