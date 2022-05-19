@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'weather_app_icons.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,8 +9,7 @@ import 'package:firebase_database/firebase_database.dart';
 void main() async {
     runApp(const WeatherApp());
 
-    const String noDataMessage = 'waiting for data...';
-    var temperature, humidity, heat_index  = noDataMessage;
+    WeatherService reading = WeatherService();
 
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
@@ -25,21 +25,48 @@ void main() async {
     ref.orderByKey().limitToLast(1).onChildAdded.listen((DatabaseEvent event) { 
         Map<String, dynamic>.from(event.snapshot.value as dynamic).forEach((key, value) => {
             if(key == 'temperature')
-                temperature = value
+                reading.temperature = value
             else if (key == 'humidity')
-                humidity = value
+                reading._humidity = value
             else if (key == 'heat_index')
-                heat_index = value
+                reading.heat_index = value
         });
-        print(temperature);
+        //print(reading.temperature);
     });
+}
+
+class WeatherService {
+    static final WeatherService _instance = WeatherService._internal();
+
+    factory WeatherService() => _instance;
+    
+    WeatherService._internal() {
+        String _temperature = 'waiting for data...';
+        String _humidity = 'waiting for data...';
+        String _heat_index = 'waiting for data...';
+    }
+
+    String? _temperature;
+    String? _humidity;
+    String? _heat_index;
+
+    String? get temperature => _temperature;
+    String? get humidity => _humidity;
+    String? get heat_index => _heat_index;
+
+    set temperature(String? value) => _temperature = value;
+    set humidity(String? value) => _humidity = value;
+    set heat_index(String? value) => _heat_index = value;
 }
 
 class WeatherApp extends StatelessWidget {
     const WeatherApp({Key? key}) : super(key: key);
 
+
     @override
     Widget build(BuildContext context) {
+        WeatherService reading = WeatherService();
+
         const Color nicePurpleBro = Color.fromRGBO(112, 112, 255, 1);
         const Color grey70 = Color.fromRGBO(78, 78, 78, 1);
 
@@ -63,12 +90,16 @@ class WeatherApp extends StatelessWidget {
         const FontWeight cardDataFontWeight = FontWeight.w600;
 
         const double cardIconFontSize = 60;
-        const Color cardIconColor = nicePurpleBro;
+        //const Color cardIconColor = nicePurpleBro;
+        const Color cardIconColor = Color.fromARGB(255, 163, 156, 244);
 
         return MaterialApp(
             theme: ThemeData(
                 textTheme: Theme.of(context).textTheme.apply(
-                    fontFamily: 'SourceSansPro',
+                    //fontFamily: 'SourceSansPro',
+                    //fontFamily: GoogleFonts.didactGothic(fontWeight: FontWeight.w400).fontFamily,
+                    fontFamily: GoogleFonts.lexendDeca(fontWeight: FontWeight.w300).fontFamily,
+                    //fontFamily: GoogleFonts.alata(fontWeight: FontWeight.w200).fontFamily,
                     bodyColor: nicePurpleBro,
                     displayColor: const Color.fromRGBO(0, 0, 0, 1)
                 )
@@ -186,10 +217,10 @@ class WeatherApp extends StatelessWidget {
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
                                                     Column(
-                                                        children: const [
+                                                        children: [
                                                             Text(
-                                                                '43%',
-                                                                style: TextStyle(
+                                                                '${reading.humidity}',
+                                                                style: const TextStyle(
                                                                     fontSize: cardDataFontSize,
                                                                     fontWeight: cardDataFontWeight,
                                                                 ),
