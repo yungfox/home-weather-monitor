@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="weather_app.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:weather_app"
+    Shell.FlyoutBehavior="Flyout">
+
+    <Shell.TitleView>
+        <StackLayout HorizontalOptions="End">
+            <Button
+                Margin="7"
+                Padding="15"
+                ImageSource="moon_fill.svg"
+                BackgroundColor="{AppThemeBinding Light={StaticResource Light}, Dark={StaticResource Dark}}"
+                WidthRequest="50"
+                HeightRequest="50"
+                CornerRadius="50"
+                Clicked="ThemeButton_Clicked"
+                >
+            </Button>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <StackLayout Padding="15" HeightRequest="80">
+                <Border Padding="10" StrokeShape="RoundRectangle 40,40,40,40" HeightRequest="60" StrokeThickness="0">
+                    <FlexLayout JustifyContent="Center" Direction="Column">
+                        <Label Text="{Binding Title}" FontFamily="LexendDeca400" FontSize="17" Margin="10,0,0,0" TextColor="#4E4E4E"/>
+                    </FlexLayout>
+                </Border>
+            </StackLayout>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <ShellContent
+        Title="home"
+        Shell.FlyoutItemIsVisible="True"
+        Shell.TitleColor="{AppThemeBinding Light={StaticResource Light}, Dark={StaticResource Black}}"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="stats"
+        Shell.FlyoutItemIsVisible="True"
+        Shell.TitleColor="{AppThemeBinding Light={StaticResource Light}, Dark={StaticResource Black}}"
+        ContentTemplate="{DataTemplate local:Stats}"
+        Route="Stats" />
+
+</Shell>

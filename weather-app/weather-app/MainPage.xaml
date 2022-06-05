@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="weather_app.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout 
+            Spacing="25" 
+            VerticalOptions="Start">
+            <Border Margin="30,30,30,20" HeightRequest="165" StrokeShape="RoundRectangle 25,25,25,25" StrokeThickness="0" Padding="25" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+                <Border.Shadow>
+                    <Shadow Brush="{AppThemeBinding Light={StaticResource LightShadow}, Dark={StaticResource DarkShadow}}" Radius="10" Offset="0,0" Opacity="1" />
+                </Border.Shadow>
+                <FlexLayout Direction="Column" JustifyContent="SpaceEvenly" FlexLayout.Grow="1">
+                    <Label Text="temperature" FontSize="30" FontFamily="LexendDeca400" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" />
+                    <FlexLayout FlexLayout.AlignSelf="Start" FlexLayout.Grow="1" Direction="Row" JustifyContent="SpaceBetween">
+                        <Label FontSize="40" x:Name="temperature" FontFamily="LexendDeca600" TextColor="#7070FF" Margin="0,5,0,0" />
+                        <Image Source="thermometer_half.svg"/>
+                    </FlexLayout>
+
+                </FlexLayout>
+            </Border>
+
+            <Border Margin="30,0,30,20" HeightRequest="165" StrokeShape="RoundRectangle 25,25,25,25" StrokeThickness="0" Padding="25" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+                <Border.Shadow>
+                    <Shadow Brush="{AppThemeBinding Light={StaticResource LightShadow}, Dark={StaticResource DarkShadow}}" Radius="10" Offset="0,0" Opacity="1" />
+                </Border.Shadow>
+                <FlexLayout Direction="Column" JustifyContent="SpaceEvenly" FlexLayout.Grow="1">
+                    <Label Text="humidity" FontSize="30" FontFamily="LexendDeca400" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" />
+                    <FlexLayout FlexLayout.AlignSelf="Start" FlexLayout.Grow="1" Direction="Row" JustifyContent="SpaceBetween">
+                        <Label FontSize="40" x:Name="humidity" FontFamily="LexendDeca600" TextColor="#7070FF" Margin="0,5,0,0" />
+                        <Image Source="moisture.svg"/>
+                    </FlexLayout>
+                </FlexLayout>
+            </Border>
+
+            <Border Margin="30,0,30,20" HeightRequest="165" StrokeShape="RoundRectangle 25,25,25,25" StrokeThickness="0" Padding="25" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+                <Border.Shadow>
+                    <Shadow Brush="{AppThemeBinding Light={StaticResource LightShadow}, Dark={StaticResource DarkShadow}}" Radius="10" Offset="0,0" Opacity="1" />
+                </Border.Shadow>
+                <FlexLayout Direction="Column" JustifyContent="SpaceEvenly" FlexLayout.Grow="1">
+                    <Label Text="heat index" FontSize="30" FontFamily="LexendDeca400" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" />
+                    <FlexLayout FlexLayout.AlignSelf="Start" FlexLayout.Grow="1" Direction="Row" JustifyContent="SpaceBetween">
+                        <Label FontSize="40" x:Name="heat_index" FontFamily="LexendDeca600" TextColor="#7070FF" Margin="0,5,0,0" />
+                        <Image Source="thermometer_sun.svg"/>
+                    </FlexLayout>
+                </FlexLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
