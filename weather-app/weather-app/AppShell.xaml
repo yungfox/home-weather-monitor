@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:weather_app"
-    Shell.FlyoutBehavior="Flyout">
+    Shell.FlyoutBehavior="Flyout"
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Dark}}">
 
     <Shell.TitleView>
         <StackLayout HorizontalOptions="End">
@@ -24,27 +25,41 @@
 
     <Shell.ItemTemplate>
         <DataTemplate>
-            <StackLayout Padding="15" HeightRequest="80">
-                <Border Padding="10" StrokeShape="RoundRectangle 40,40,40,40" HeightRequest="60" StrokeThickness="0">
-                    <FlexLayout JustifyContent="Center" Direction="Column">
-                        <Label Text="{Binding Title}" FontFamily="LexendDeca400" FontSize="17" Margin="10,0,0,0" TextColor="#4E4E4E"/>
-                    </FlexLayout>
-                </Border>
-            </StackLayout>
+            <Border Padding="10" StrokeShape="RoundRectangle 40,40,40,40" HeightRequest="60" Margin="10" StrokeThickness="0">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <FlexLayout JustifyContent="Center" Direction="Column">
+                    <Label Text="{Binding Title}" FontFamily="LexendDeca400" FontSize="17" Margin="10,0,0,0" TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}"/>
+                </FlexLayout>
+            </Border>
         </DataTemplate>
     </Shell.ItemTemplate>
 
     <ShellContent
         Title="home"
         Shell.FlyoutItemIsVisible="True"
-        Shell.TitleColor="{AppThemeBinding Light={StaticResource Light}, Dark={StaticResource Black}}"
+        Shell.TitleColor="{AppThemeBinding Light={StaticResource Light}, Dark={StaticResource Dark}}"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
     <ShellContent
         Title="stats"
         Shell.FlyoutItemIsVisible="True"
-        Shell.TitleColor="{AppThemeBinding Light={StaticResource Light}, Dark={StaticResource Black}}"
+        Shell.TitleColor="{AppThemeBinding Light={StaticResource Light}, Dark={StaticResource Dark}}"
         ContentTemplate="{DataTemplate local:Stats}"
         Route="Stats" />
 
